@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  {
+public class SecurityConfig {
 
     private final JwtService jwtService;
     private final UserRepository userRepository;
@@ -50,12 +50,12 @@ public class SecurityConfig  {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/auth").permitAll()
-                    .requestMatchers("/secret").hasRole("ADMIN")
-                    .requestMatchers("/hello").authenticated()
-                    .requestMatchers("/profiles", "/profiles/*").authenticated()
-                    .anyRequest().denyAll()
+                        .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth").permitAll()
+                        .requestMatchers("/secret").hasRole("ADMIN")
+                        .requestMatchers("/hello").authenticated()
+                        .requestMatchers("/profiles", "/profiles/*").authenticated()
+                        .anyRequest().denyAll()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf -> csrf.disable())
